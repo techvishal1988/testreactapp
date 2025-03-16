@@ -7,9 +7,9 @@ permissions:
   id-token: write
   contents: read
 env:
-  AZURE_CONTAINER_REGISTRY: azurepoc123
+  AZURE_CONTAINER_REGISTRY: cfshccdcr01
   Resource_Group: cfsh-cc-d-rg02
-  CONTAINER_APP_NAME: nextgen
+  CONTAINER_APP_NAME: cascades-fullversion-p1-spa
 jobs:
   build-and-deploy:
     name: Build and Push Docker Image to ACR
@@ -21,14 +21,14 @@ jobs:
       - name: Login to Azure
         uses: azure/login@v2
         with:
-           creds: ${{ secrets.AZURE_CREDENTIALS }}
+           creds: ${{ secrets.AZURE_CREDENTIALS_UAT }}
         
       - name: Login to Azure
         uses: docker/login-action@v3
         with:
           registry: ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io
-          username: ${{ secrets.ACR_NAME }}
-          password: ${{ secrets.ACR_PASSWORD }}
+          username: ${{ secrets.ACR_NAME_UAT }}
+          password: ${{ secrets.ACR_PASSWORD_UAT }}
       - name: PUSH TO ACR
         uses: docker/build-push-action@v6
         with:
@@ -50,7 +50,7 @@ jobs:
       #- name: Deploy to webapp
        # uses: azure/container-apps-deploy-action@v1
         #with: 
-           app-name: ${{ secrets.APP_NAME }}
+           app-name: ${{ secrets.APP_NAME_UAT }}
            images: ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ env.CONTAINER_APP_NAME }}:${{ github.sha }}
            #resourceGroup: ${{ env.Resource_Group }}
            #containerAppName: ${{ env.CONTAINER_APP_NAME }}
