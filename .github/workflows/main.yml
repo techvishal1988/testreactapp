@@ -7,9 +7,9 @@ permissions:
   id-token: write
   contents: read
 env:
-  AZURE_CONTAINER_REGISTRY: cfshccdcr01
+  AZURE_CONTAINER_REGISTRY: azurepoc123
   Resource_Group: cfsh-cc-d-rg02
-  CONTAINER_APP_NAME: cascades-fullversion-p1-spa
+  CONTAINER_APP_NAME: azurepoc1234
 jobs:
   build-and-deploy:
     name: Build and Push Docker Image to ACR
